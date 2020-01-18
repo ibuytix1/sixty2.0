@@ -1,0 +1,2 @@
+[20-Mar-2019 12:15:43 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home4/deaninfotech/public_html/d2/dev/DeCipher/app/Model/admin/PromoterModel.php on line 23
+[20-Mar-2019 12:16:07 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home4/deaninfotech/public_html/d2/dev/DeCipher/app/Model/admin/PromoterModel.php on line 23

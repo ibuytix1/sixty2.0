@@ -1,0 +1,17 @@
+@import "variable.scss";
+.page-title {
+    padding: 15px 0px;
+    box-shadow: 0px 0px 15px #ddd;
+    h1 {
+        font-size: 20px;
+        margin: 0px;
+    }
+    nav {
+        float: right;
+        .breadcrumb {
+            background: transparent;
+            margin: 0px;
+            padding: 10px 0px;
+        }
+    }
+}
