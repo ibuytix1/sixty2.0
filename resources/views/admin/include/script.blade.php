@@ -35,3 +35,34 @@
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{URL::asset('public/assets/admin/js/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 <script src="{{URL::asset('public/assets/admin/js/ckeditor/ckeditor.js')}}"></script>
+
+<script>
+	function deleteConfirmPopup( action )
+	{
+		var id = action.data('id');
+        $('#modelConfirm').attr('data', id);
+        $('#display_type').text(action.data('name'));
+        $('#modelConfirm').attr('data-row-id', id);
+        $('#modal-warning').modal();
+	}
+
+	function deletePopupSubmit( attribute, url, token, organizerTable )
+	{
+		var id = attribute.attr('data');
+        var ths = attribute.attr('data');
+        var data_row_id = attribute.attr('data-row-id');
+
+		if (id != '') 
+		{
+			$.ajax({
+                type: 'post',
+                url: url,
+                data: 'id=' + id + '&_token=' + token,
+				beforeSend: function() { },
+				success: function (data) {
+					organizerTable.ajax.reload();
+				}
+			});
+		}
+	}
+</script>

@@ -35,7 +35,7 @@
                 Nav header start
             ***********************************-->
             <div class="nav-header">
-                <a href="index.html" class="brand-logo">
+                <a href="{{ url($adminURL.'dashboard')}}" class="brand-logo">
                     <span class="logo-abbr">D</span>
                     <span class="logo-compact">{{Session::get('user_data')['full_name']}}</span>
                     <span class="brand-title">{{Session::get('user_data')['full_name']}}</span>

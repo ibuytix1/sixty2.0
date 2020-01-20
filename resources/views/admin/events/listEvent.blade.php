@@ -11,14 +11,14 @@
             <div class="col-sm-6 p-md-0">
                 <div class="breadcrumb-range-picker">
                     <span><i class="icon-calender"></i></span>
-                    <span class="ml-1">Category List</span>
+                    <span class="ml-1">Event List</span>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                 	<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Category</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Category List</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Event</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Event List</a></li>
                 </ol>
             </div>
         </div>
@@ -71,25 +71,7 @@
             </div>
         </div>
     </div>
-	<div class="modal modal-default fade" id="modal-warning">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">Warning</h4>
-				</div>
-				<div class="modal-body">
-					<p>Are you sure you want to delete this <b>category</b> ?</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success deleteConfirm" id="modelConfirm" data-row-id='' data-dismiss="modal">Save changes</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	@include('admin.include.popup-modal')
 </div>
 <!--**********************************
     Content body end
@@ -102,7 +84,6 @@
         const viewEvent = "{{url($adminURL.'viewEvent/')}}";
         const orgnizerListUrl = "{{url($adminURL.'listEventJson/')}}";
         var organizerTable = $('#event_list').DataTable({
-// 			"processing":true,
 			"serverSide":true,
 			"paging": true,
 			"pageLength": 10,
@@ -133,7 +114,12 @@
 			{
                 "targets": -1,
                 "data": function (row, type, val, meta) {
-                    return '<div class="btn-group"><button type="button" class="btn btn-info btn-xs">Action</button><button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul class="dropdown-menu px-3 action" role="menu"><li><a href="' + viewEvent + '/' + row[0] + '"><i class="fa fa-eye pr-2"></i> View Detail</a></li></ul></div>';
+                	var action ='<div class="btn-group">';
+                	action+='<button type="button" class="btn btn-info btn-xs">Action</button>';
+                	action+='<button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button>';
+                	action+='<ul class="dropdown-menu px-3 action" role="menu">';
+                	action+='<li><a href="' + viewEvent + '/' + row[0] + '" data-type="Event" data-name="'+row[1]+'"><i class="fa fa-eye pr-2"></i> View Detail</a></li></ul></div>';
+                	return action;
                 }
             },
 			{
@@ -145,31 +131,11 @@
 		});
 
 		$('#modal-warning').on('click', '.deleteConfirm', function(){
-            var id = $(this).attr('data');
-            var token = '{{ csrf_token() }}';
-            var ths = $(this).attr('data');
-            var data_row_id = $(this).attr('data-row-id');
-
-			if (id != '') 
-			{
-				$.ajax({
-                    type: 'post',
-                    url: "{{ url('Admin/deleteCategory')}}",
-                    data: 'id=' + id + '&_token=' + token,
-					beforeSend: function() { },
-					success: function (data) {
-						organizerTable.ajax.reload();
-					}
-				});
-			}
+			deletePopupSubmit( $(this), '{{ url("Admin/deleteCategory")}}', '{{ csrf_token() }}', organizerTable );
 		});
 
 		organizerTable.on('click', '.delete_row', function(){
-            var id = $(this).attr('data-id');
-            $('#modelConfirm').attr('data', id);
-            $('#modelConfirm').attr('data-row-id', id);
-            $('#modal-warning').modal();
-            return false;
+			deleteConfirmPopup($(this));
 		});
 	});
 </script>

@@ -1,7 +1,7 @@
 …or create a new repository on the command line
 echo "# sixty2.0" >> README.md
 git init
-git add README.md
+git add .
 git commit -m "first commit"
 git remote add origin https://github.com/ibuytix1/sixty2.0.git
 git push -u origin mast

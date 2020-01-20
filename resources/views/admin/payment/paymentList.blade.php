@@ -169,11 +169,7 @@
         });
 
         $('.delete_plan').on('click', function(){
-            var id = $(this).attr('data-id');
-            $('#modelConfirm').attr('data', id);
-            $('#modelConfirm').attr('data-row-id', $(this).closest('tr').attr('data-row'));
-            $('#modal-warning').modal();
-            return false;
+        	deleteConfirmPopup($(this));
         });
     });
   

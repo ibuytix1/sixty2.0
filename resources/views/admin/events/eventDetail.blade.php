@@ -87,12 +87,12 @@
 							@foreach($event->REL_Event_Image as $image)
 								<div class="form-group col-md-12"> <h3>Event Images</h3> </div>
                                 <div class="form-group col-md-6">
-                                    <img src="{{ asset('/public/upload/event_image/' . $image->image_name) }}" style="width: 100%; height: auto; margin-bottom: 20px;">
+                                    <img src="{{ asset('/public/upload/event_image/' . $image->image_name) }}" class="event-image">
                                 </div>
                             @endforeach
                             
                             <div class="form-row">
-    							<div class="form-group col-md-12 text-center"> <h3>Other Information</h3> </div>
+    							<div class="form-group col-md-12 "> <h3>Other Information</h3> </div>
     							<div class="form-group col-md-6">
         							<b>Information</b> : {{ $event->other_information }}
         						</div>
@@ -105,7 +105,7 @@
         					</div>
         						
         					<div class="form-row">	
-        						<div class="form-group col-md-12 text-center">
+        						<div class="form-group col-md-12">
                                     <h3>Organizer Details</h3>
                                 </div>
         						<div class="form-group col-md-6">
@@ -141,10 +141,11 @@
     						</div>
     						
     						<div class="form-row">	
-        						<div class="form-group col-md-12 text-center">
+        						<div class="form-group col-md-12 ">
                                     <h3>Ticket Information</h3>
                                 </div>
                                 <div class="form-group col-md-12">
+									<div class="table-responsive">
                                 	<table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -181,6 +182,7 @@
                                             @endif
                                         </tbody>
                                     </table>
+                                    </div>
                                 </div>
                                 <a href="{{ url('Admin/eventList') }}" class="btn btn-info" style="float: right">Back</a>
                             </div>

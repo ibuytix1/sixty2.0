@@ -100,7 +100,7 @@ class EventController extends Controller
             array_push($resourceDatatable["data"], [
                 $event->id,
                 $event->event_title,
-                $event->REL_event_Category->category_name,
+                @$event->REL_event_Category->category_name,
                 $event->REL_Event_Organizer->first_name . ' ' . $event->REL_Event_Organizer->last_name,
                 $event->event_location,
                 '<a href="'.url('/event/'. $event->event_url).'" target="_blank">'.url('/event/' . $event->event_url).'</a>',
